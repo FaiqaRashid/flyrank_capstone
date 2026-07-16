@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your FlyRank account">
+  <title>Sign Up — FlyRank</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="auth-page">
+    <div class="auth-card">
+      <header class="auth-header">
+        <a href="index.html" class="auth-logo" aria-label="FlyRank home">
+          <span class="auth-logo-icon" aria-hidden="true">✈</span>
+          FlyRank
+        </a>
+        <h1>Create your account</h1>
+        <p>Join FlyRank to start ranking and tracking.</p>
+      </header>
+
+      <div id="success-message" class="form-success" role="status" aria-live="polite">
+        Account created successfully! You can now sign in.
+      </div>
+
+      <form id="signup-form" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="full-name">Full name</label>
+          <input
+            type="text"
+            id="full-name"
+            name="fullName"
+            autocomplete="name"
+            placeholder="Jane Doe"
+            required
+            aria-describedby="full-name-error"
+          >
+          <span id="full-name-error" class="field-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+            aria-describedby="email-error"
+          >
+          <span id="email-error" class="field-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="new-password"
+              placeholder="Create a password"
+              required
+              minlength="8"
+              aria-describedby="password-hint password-error"
+            >
+            <button type="button" class="password-toggle" data-target="password" aria-label="Show password">
+              Show
+            </button>
+          </div>
+          <span id="password-hint" class="form-hint">At least 8 characters with a letter and a number.</span>
+          <span id="password-error" class="field-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Confirm password</label>
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirmPassword"
+              autocomplete="new-password"
+              placeholder="Re-enter your password"
+              required
+              aria-describedby="confirm-password-error"
+            >
+            <button type="button" class="password-toggle" data-target="confirm-password" aria-label="Show password">
+              Show
+            </button>
+          </div>
+          <span id="confirm-password-error" class="field-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <div class="form-checkbox">
+            <input type="checkbox" id="terms" name="terms" required aria-describedby="terms-error">
+            <label for="terms">
+              I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            </label>
+          </div>
+          <span id="terms-error" class="field-error" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          Create account
+        </button>
+      </form>
+
+      <p class="auth-footer">
+        Already have an account? <a href="login.html">Sign in</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="js/signup.js"></script>
+</body>
+</html>
