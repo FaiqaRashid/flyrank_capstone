@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up — FlyRank</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="signup-page">
+    <section class="signup-card" aria-labelledby="signup-heading">
+      <h1 id="signup-heading">Create your account</h1>
+      <p class="signup-intro">Join FlyRank to get started.</p>
+
+      <div
+        id="form-success"
+        class="form-success"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+
+      <form id="signup-form" class="signup-form" novalidate>
+        <div class="form-field">
+          <label for="full-name">Full name</label>
+          <input
+            type="text"
+            id="full-name"
+            name="fullName"
+            autocomplete="name"
+            aria-describedby="full-name-error"
+            aria-invalid="false"
+            required
+          >
+          <span id="full-name-error" class="error-message" role="alert"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            aria-describedby="email-error"
+            aria-invalid="false"
+            required
+          >
+          <span id="email-error" class="error-message" role="alert"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="new-password"
+            aria-describedby="password-error"
+            aria-invalid="false"
+            required
+          >
+          <span id="password-error" class="error-message" role="alert"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="confirm-password">Confirm password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirmPassword"
+            autocomplete="new-password"
+            aria-describedby="confirm-password-error"
+            aria-invalid="false"
+            required
+          >
+          <span id="confirm-password-error" class="error-message" role="alert"></span>
+        </div>
+
+        <div class="form-field form-field--checkbox">
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            aria-describedby="terms-error"
+            aria-invalid="false"
+            required
+          >
+          <label for="terms">I agree to the Terms and Conditions</label>
+          <span id="terms-error" class="error-message" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn-submit">Sign up</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/signup.js"></script>
+</body>
+</html>
