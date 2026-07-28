@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+  /* Raw Palette Tokens */
+  --color-maroon: #800000;
+  --color-brown: #633A2C;
+  --color-ochre: #B88A2C;
+  --color-gold: #B8860B;
+  --color-cream: #E0D6B8;
+
+  /* Semantic Design Tokens */
+  --color-primary: #800000;
+  --color-primary-foreground: #E0D6B8;
+
+  --color-secondary: #633A2C;
+  --color-secondary-foreground: #E0D6B8;
+
+  --color-accent: #B8860B;
+  --color-accent-foreground: #3B1A1A;
+
+  --color-hover: #B88A2C;
+  --color-hover-foreground: #3B1A1A;
+
+  --color-background: #E0D6B8;
+  --color-foreground: #3B1A1A;
+
+  --color-surface: #FAF6ED;
+  --color-surface-foreground: #3B1A1A;
+
+  --color-card: #633A2C;
+  --color-card-foreground: #E0D6B8;
+}
+
+:root {
+  --background: #E0D6B8;
+  --foreground: #3B1A1A;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
