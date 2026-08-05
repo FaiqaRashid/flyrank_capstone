@@ -10,6 +10,7 @@ export default function Navbar() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
+    { name: "AI Chat", href: "/chat" },
     { name: "Contact", href: "/contact" },
     { name: "Health Check", href: "/health" },
   ];
