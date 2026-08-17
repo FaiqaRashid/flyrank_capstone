@@ -2,44 +2,141 @@
 @config "../tailwind.config.js";
 
 @theme {
-  /* Raw Palette Tokens */
-  --color-maroon: #800000;
-  --color-brown: #633A2C;
-  --color-ochre: #B88A2C;
-  --color-gold: #B8860B;
-  --color-cream: #E0D6B8;
+  /* Design System Color Tokens */
+  --color-sage: #97A97C;
+  --color-cream: #FAF6F0;
+  --color-beige: #F2EDE4;
+  --color-obsidian: #121413;
 
-  /* Semantic Design Tokens */
-  --color-primary: #800000;
-  --color-primary-foreground: #E0D6B8;
+  /* Semantic Mappings */
+  --color-primary: #97A97C;
+  --color-primary-foreground: #121413;
 
-  --color-secondary: #633A2C;
-  --color-secondary-foreground: #E0D6B8;
+  --color-background: #FAF6F0;
+  --color-foreground: #121413;
 
-  --color-accent: #B8860B;
-  --color-accent-foreground: #3B1A1A;
+  --color-card: #F2EDE4;
+  --color-card-foreground: #121413;
 
-  --color-hover: #B88A2C;
-  --color-hover-foreground: #3B1A1A;
+  --color-border: #121413;
 
-  --color-background: #E0D6B8;
-  --color-foreground: #3B1A1A;
+  /* Functional Semantic Status Colors (Used ONLY for functional states: Success, Error, Warning) */
+  --color-status-success-bg: #DCFCE7;
+  --color-status-success-[#14532D]: #14532D;
+  --color-status-success-[#166534]: #166534;
 
-  --color-surface: #FAF6ED;
-  --color-surface-foreground: #3B1A1A;
+  --color-status-error-bg: #FEE2E2;
+  --color-status-error-[#7F1D1D]: #7F1D1D;
+  --color-status-error-[#991B1B]: #991B1B;
 
-  --color-card: #633A2C;
-  --color-card-foreground: #E0D6B8;
+  --color-status-warning-bg: #FEF3C7;
+  --color-status-warning-[#78350F]: #78350F;
+  --color-status-warning-[#92400E]: #92400E;
 }
 
 :root {
-  --background: #E0D6B8;
-  --foreground: #3B1A1A;
+  --background: #FAF6F0;
+  --foreground: #121413;
+  --sage: #97A97C;
+  --cream: #FAF6F0;
+  --beige: #F2EDE4;
+  --obsidian: #121413;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
 }
 
+/* Custom Utilities for Design System */
+.border-sharp {
+  border: 2px solid #121413;
+}
+
+.shadow-sharp {
+  box-shadow: 4px 4px 0px #121413;
+}
+
+.shadow-sharp-sm {
+  box-shadow: 2px 2px 0px #121413;
+}
+
+.shadow-sharp-lg {
+  box-shadow: 6px 6px 0px #121413;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.section-padding {
+  padding: 32px 5%;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 48px 8%;
+  }
+}
+
+/* Custom focus ring for WCAG 2.1 AA accessibility */
+*:focus-visible {
+  outline: 3px solid #97A97C !important;
+  outline-offset: 2px !important;
+}
+
+/* Skeleton Shimmer Loading Animations */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #F2EDE4 0%,
+    #FAF6F0 50%,
+    #F2EDE4 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+/* Ink Splash & Shatter Reveal Animations */
+.ink-drop {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: #97A97C;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: splash 0.8s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes splash {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(95);
+    opacity: 0;
+  }
+}

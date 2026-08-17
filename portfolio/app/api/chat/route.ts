@@ -1,47 +1,29 @@
 import { createGroq } from "@ai-sdk/groq";
 import { streamText } from "ai";
 
-
-/**
- * ============================================================================
- * SERVER CONFIGURATION & CONSTANTS
- * ============================================================================
- * MODEL_NAME: Specifies the Google Gemini model identifier.
- * SYSTEM_PROMPT: Defines the assistant's persona, context, and capabilities
- *                for visitors browsing Faiqa Rashid's portfolio website.
- */
-export const MODEL_NAME = "llama-3.3-70b-versatile";
+export const MODEL_NAME = "openai/gpt-oss-120b";
 
 export const SYSTEM_PROMPT = `You are an intelligent, friendly AI assistant embedded on Faiqa Rashid's portfolio website.
 
 Key Information about Faiqa Rashid:
-- Role: Front-End AI Engineering Intern & Computer Science Student.
-- Background: Passionate about building modern, high-performance web applications with AI capabilities, elegant UX, and clean architecture.
-- Featured Projects:
-  1. This Portfolio App: Built with Next.js, React, TypeScript, Tailwind CSS (with custom color palette: Maroon, Brown, Ochre, Gold, Cream), and Google Gemini AI integration.
-  2. Anime Discovery App: An interactive web app for discovering, searching, and recommending anime content.
-- Skills: React, Next.js, TypeScript, JavaScript, Tailwind CSS, AI SDK / LLM integration, REST APIs, HTML/CSS, UI/UX design.
+- Full-stack developer, AI/NLP-focused, final-year Computer Science student
+- Philosophy: "The best way to learn technology is by actually building it"
+
+Featured Projects:
+1. Pakfreelance AI Agent — AMD Developer Hackathon 5-agent AI toolkit built with CrewAI orchestration to help freelancers across Pakistan and South Asia (proposal generation, scam detection, rate calculation, proposal scoring, bio writing, one-click Power Mode). Built with CrewAI, Llama 3.3 70B, AMD MI300X, and Streamlit.
+2. Anime Explorer — A React + TypeScript anime discovery app with live search, a randomized homepage feed, and localStorage-based favourites, built using AI-assisted development.
+3. Scriptclean A11y Guard — An AI-powered web accessibility auditing tool that scans websites for WCAG 2.1 compliance violations with intelligent recommendations. Built with Python, Flask, and Machine Learning.
+4. AI Contract & Legal Document Risk Analyzer — An AI-powered web app that analyzes contracts and legal documents, extracts metadata, and detects risks with confidence-scored explanations using schema-validated output. Built with Google Gemini 2.5 Flash, Streamlit, Supabase, and Pydantic.
+5. This Portfolio — Built with Next.js, React, TypeScript, Tailwind CSS, and this very AI chat feature (streaming via Groq/GPT-OSS).
+
+Skills: React, Next.js, TypeScript, JavaScript, Tailwind CSS, Python, Flask, Supabase, MySQL, AI/LLM integration, structured AI output, accessibility (WCAG), Git/GitHub.
 
 Instructions:
 - Provide concise, accurate, and engaging responses about Faiqa's skills, projects, and experience.
 - Maintain a polite, professional, yet warm tone.
-- If asked about contacting Faiqa or hiring her, direct the user to check out the Contact section on the website.`;
+- If asked about contacting Faiqa or hiring her, direct them to the Contact section on the website.
+- Only answer using the information provided above — don't invent details about her that aren't listed here.`;
 
-/**
- * ============================================================================
- * STREAMING API ROUTE HANDLER (POST)
- * ============================================================================
- * Explanation of Server Streaming Logic:
- * 1. The client sends a POST request with the array of all conversation messages
- *    ({ messages }), which preserves multi-turn context across requests.
- * 2. We extract `process.env.GOOGLE_GENERATIVE_AI_API_KEY` to authenticate
- *    with Google Generative AI (Gemini). The key is strictly read from environment
- *    variables and never hardcoded.
- * 3. `streamText()` initiates a streaming connection to Gemini using the system
- *    prompt and conversation history.
- * 4. `result.toDataStreamResponse()` returns an SSE data stream expected by the
- *    Vercel AI SDK `useChat` hook on the client.
- */
 export async function POST(req: Request) {
   try {
     const { messages } = await req.json();

@@ -1,106 +1,157 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+
+const navItems = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const [activeSection, setActiveSection] = useState<string>("home");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "AI Chat", href: "/chat" },
-    { name: "Contact", href: "/contact" },
-    { name: "Health Check", href: "/health" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map((item) => item.href.substring(1));
+      const scrollPosition = window.scrollY + 120;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionEl = document.getElementById(sections[i]);
+        if (sectionEl) {
+          const top = sectionEl.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(sections[i]);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", href);
+      setActiveSection(targetId);
+    }
+  };
 
   return (
-    <header className="bg-primary text-primary-foreground shadow-lg border-b border-brown/30 sticky top-0 z-50">
-      <nav className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          onClick={() => setIsOpen(false)}
-          className="flex items-center gap-2 text-xl font-bold tracking-tight text-cream hover:text-gold transition-colors"
+    <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b-2 border-obsidian transition-all">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 h-16 flex items-center justify-between">
+        {/* Brand Logo */}
+        <motion.a
+          whileHover={shouldReduceMotion ? {} : { scale: 1.04 }}
+          whileTap={shouldReduceMotion ? {} : { scale: 0.96 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
+          href="#home"
+          onClick={(e) => handleNavClick(e, "#home")}
+          className="font-black text-xl tracking-tight text-obsidian flex items-center gap-2 group focus-visible:ring-2 focus-visible:ring-sage cursor-pointer"
+          aria-label="Faiqa Rashid Home"
         >
-          <span className="bg-accent text-accent-foreground px-2.5 py-1 rounded-md text-sm font-black tracking-wider uppercase shadow-sm">
-            PF
+          <span className="w-8 h-8 rounded-lg bg-sage border-2 border-obsidian flex items-center justify-center font-mono text-sm shadow-sharp-sm transition-transform">
+            FR
           </span>
-          <span>Portfolio</span>
-        </Link>
+          <span className="font-bold text-lg hidden sm:inline-block">
+            Faiqa Rashid
+          </span>
+        </motion.a>
 
-        {/* Desktop Navigation (>= 768px) */}
-        <div className="hidden md:flex items-center space-x-2 text-sm font-semibold">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="px-3.5 py-2 rounded-lg text-cream hover:bg-hover hover:text-hover-foreground transition-all duration-200"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
+        {/* Desktop Anchor Links with Morphing Active Indicator */}
+        <nav className="hidden md:flex items-center gap-1.5 relative" aria-label="Main Navigation">
+          {navItems.map((item) => {
+            const sectionId = item.href.substring(1);
+            const isActive = activeSection === sectionId;
 
-        {/* Mobile Hamburger Toggle Button (< 768px) */}
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`relative px-4 py-1.5 rounded-lg text-sm font-extrabold transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-sage ${
+                  isActive
+                    ? "text-obsidian"
+                    : "text-obsidian/80 hover:text-obsidian hover:bg-beige/60"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId={shouldReduceMotion ? undefined : "activeNavHighlight"}
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 30,
+                    }}
+                    className="absolute inset-0 bg-sage border-2 border-obsidian rounded-lg shadow-sharp-sm -z-10"
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Mobile Hamburger Button */}
         <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isOpen}
-          className="md:hidden p-2 rounded-lg text-cream hover:bg-hover hover:text-hover-foreground focus:outline-none focus:ring-2 focus:ring-gold transition-colors"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden p-2 rounded-lg bg-beige border-2 border-obsidian text-obsidian focus-visible:ring-2 focus-visible:ring-sage cursor-pointer"
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open navigation menu"}
+          aria-expanded={isMobileMenuOpen}
         >
-          {isOpen ? (
-            // Close X Icon
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2.5}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            // Hamburger Icon
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2.5}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          )}
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isMobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
         </button>
-      </nav>
+      </div>
 
-      {/* Mobile Collapsible Navigation Menu (< 768px) */}
-      {isOpen && (
-        <div className="md:hidden bg-primary border-t border-brown/30 px-4 pt-3 pb-5 space-y-2 shadow-inner">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="block px-4 py-3 rounded-lg text-base font-semibold text-cream hover:bg-hover hover:text-hover-foreground transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <nav
+          className="md:hidden bg-cream border-b-2 border-obsidian px-4 py-4 space-y-2 animate-fade-in"
+          aria-label="Mobile Navigation"
+        >
+          {navItems.map((item) => {
+            const sectionId = item.href.substring(1);
+            const isActive = activeSection === sectionId;
+
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`block w-full text-left px-4 py-2.5 rounded-lg text-base font-extrabold border-2 transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-sage text-obsidian border-obsidian shadow-sharp-sm"
+                    : "bg-beige text-obsidian border-obsidian/20 hover:border-obsidian"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+        </nav>
       )}
     </header>
   );

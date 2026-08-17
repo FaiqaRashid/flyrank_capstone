@@ -1,0 +1,67 @@
+================================================================================
+                                 FAIQA RASHID
+       Faisalabad, Pakistan | 0325-0062083 | faiqarashid06@gmail.com
+================================================================================
+
+PROFESSIONAL SUMMARY
+--------------------
+Computer Science student specializing in Full-Stack Web Development and Machine
+Learning, with hands-on experience building production-quality applications. Proficient in
+end-to-end development using Python, JavaScript, PHP, and SQL. Demonstrated ability to
+integrate AI/ML solutions into scalable web applications. Active participant in competitive
+hackathons (IBM Developer Day, AMD Developer Hackathon) and passionate about clean
+code, user-centric design, and continuous learning. Seeking internship opportunities to
+contribute technical expertise in full-stack development and AI-driven solutions.
+
+TECHNICAL SKILLS
+----------------
+• Programming & Databases: Python, C++, Java, SQL (MySQL).
+• Web Engineering: PHP, HTML5, CSS3, Streamlit (Data-driven Web Apps).
+• AI & Data Science: Machine Learning (Scikit-Learn), Basic Data Analysis,
+  Prompt Engineering.
+• Systems & Networking: Cisco Packet Tracer (Network Topology), Logisim
+  (Logic Circuit Design).
+• Development Tools: VS Code, Jupyter Notebook, Git / GitHub, Canva.
+• Professional Competencies: Advanced Debugging, Problem Solving, Technical
+  Documentation (SDLC), and Efficient Time Management.
+
+PROJECTS
+--------
+1. Pakfreelance - Freelance Marketplace Platform | Python, JavaScript, MySQL, Full Stack
+   AMD Developer Hackathon Participant | Live Demo: https://huggingface.co/spaces/lablab-ai-amd-developer-hackathon/pakfreelance-ai-agent
+   • Designed and built complete full-stack platform connecting Pakistani talent with global clients
+   • Implemented user authentication system, project management features, and secure backend architecture
+   • Currently deployed and live for real user interactions on Hugging Face
+
+2. Scrollix: Manhwa Catalog Platform | HTML5, CSS3, PHP, MySQL
+   • Designed a high-fidelity, responsive catalog interface inspired by modern streaming platforms, utilizing a minimalist layout and interactive hover effects.
+   • Developed a "mobile-first" user experience, ensuring the catalog and navigation remain seamless across various screen sizes.
+   • Integrated a PHP/MySQL backend specifically for User Authentication, implementing secure registration and login workflows to manage user access.
+
+3. Scriptclean A11y Guard | Python, Flask, Machine Learning
+   IBM Developer Day Hackathon Participant
+   • Developed intelligent web accessibility auditing tool addressing WCAG 2.1 compliance gaps
+   • Implemented automated accessibility scanning with real-time code suggestions using AI/ML
+   • Engineered end-to-end solution: Python/Flask backend, interactive frontend interface, deployment pipeline.
+
+4. Travelle: UI/UX Discovery Prototype | Canva, Double Diamond Framework
+   • Designed a high-fidelity discovery prototype for a travel platform, focusing on user-centric navigation and clean information architecture.
+   • Applied the Double Diamond design methodology to identify user pain points and create a streamlined "Explore" page layout.
+   • Focused on visual hierarchy and minimalist design principles to reduce user friction during the travel planning process.
+
+EDUCATION
+---------
+Bachelor of Science in Computer Science
+Government College Women University Faisalabad, Pakistan | Expected Graduation: 2027
+
+Additional Experience:
+• Active participation in technical projects and hackathon competitions
+• Continuous learning through professional certifications and online courses
+• Hands-on experience with full-stack development in real-world scenarios
+
+CERTIFICATIONS
+--------------
+• Front-End Developer Professional Specialization – Meta | 2025
+• Prompt Engineering Specialization – Vanderbilt University | 2025
+• Python for Everybody Specialization – University of Michigan | 2025
+================================================================================
