@@ -10,7 +10,9 @@ export default function WebtoonIntro() {
   const [isExpanding, setIsExpanding] = useState<boolean>(false);
 
   useEffect(() => {
-    const seen = sessionStorage.getItem("webtoon_intro_seen");
+    const seen =
+      sessionStorage.getItem("portfolio_intro_seen") ||
+      sessionStorage.getItem("webtoon_intro_seen");
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -18,13 +20,14 @@ export default function WebtoonIntro() {
     if (!seen && !prefersReducedMotion) {
       setIsVisible(true);
 
-      // Static frame holds for 2.5 seconds, then tears fully open
+      // Hold static torn frame for 2.5 seconds, then expand
       const tearTimer = setTimeout(() => {
         setIsExpanding(true);
       }, 2500);
 
-      // Unmount intro overlay once tear expansion completes
+      // Unmount overlay after expansion transition completes
       const unmountTimer = setTimeout(() => {
+        sessionStorage.setItem("portfolio_intro_seen", "true");
         sessionStorage.setItem("webtoon_intro_seen", "true");
         setIsVisible(false);
       }, 3400);
@@ -39,6 +42,7 @@ export default function WebtoonIntro() {
   }, []);
 
   const handleSkipIntro = () => {
+    sessionStorage.setItem("portfolio_intro_seen", "true");
     sessionStorage.setItem("webtoon_intro_seen", "true");
     setIsVisible(false);
   };
@@ -58,11 +62,24 @@ export default function WebtoonIntro() {
     return null;
   }
 
-  // If user prefers reduced motion, skip intro tearing completely
   if (shouldReduceMotion) {
+    sessionStorage.setItem("portfolio_intro_seen", "true");
     sessionStorage.setItem("webtoon_intro_seen", "true");
     return null;
   }
+
+  // Organic fibrous jagged edge coordinates for realistic paper tear
+  const topJaggedEdge =
+    "M 0 0 L 1200 0 L 1200 370 Q 1160 350 1120 372 T 1040 360 T 960 378 T 880 355 T 800 375 T 720 358 T 640 376 T 560 352 T 480 374 T 400 358 T 320 376 T 240 354 T 160 372 T 80 356 L 0 375 Z";
+
+  const topAccentLine =
+    "M 1200 370 Q 1160 350 1120 372 T 1040 360 T 960 378 T 880 355 T 800 375 T 720 358 T 640 376 T 560 352 T 480 374 T 400 358 T 320 376 T 240 354 T 160 372 T 80 356 L 0 375";
+
+  const bottomJaggedEdge =
+    "M 0 800 L 1200 800 L 1200 430 Q 1160 450 1120 428 T 1040 440 T 960 422 T 880 445 T 800 425 T 720 442 T 640 424 T 560 448 T 480 426 T 400 442 T 320 424 T 240 446 T 160 428 T 80 444 L 0 425 Z";
+
+  const bottomAccentLine =
+    "M 1200 430 Q 1160 450 1120 428 T 1040 440 T 960 422 T 880 445 T 800 425 T 720 442 T 640 424 T 560 448 T 480 426 T 400 442 T 320 424 T 240 446 T 160 428 T 80 444 L 0 425";
 
   return (
     <AnimatePresence>
@@ -76,7 +93,7 @@ export default function WebtoonIntro() {
         aria-modal="true"
         aria-label="Torn Paper Portfolio Intro"
       >
-        {/* Floating Skip Control for Keyboard Accessibility */}
+        {/* Floating Skip Button */}
         <div className="absolute top-6 right-6 z-50">
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -90,49 +107,81 @@ export default function WebtoonIntro() {
           </motion.button>
         </div>
 
-        {/* Revealed Content Underneath (Visible through the torn opening) */}
-        <div className="absolute inset-0 bg-cream flex flex-col items-center justify-center p-4 sm:p-8 text-center z-10 overflow-hidden">
-          <div className="w-full flex flex-col items-center justify-center space-y-2">
-            <span className="font-mono text-xs sm:text-sm md:text-base font-black uppercase tracking-widest text-sage bg-obsidian px-3.5 py-1 rounded border border-obsidian shadow-sharp-sm mb-1">
+        {/* Revealed Paper Background Canvas with Real PORTFOLIO Heading */}
+        <div className="absolute inset-0 bg-[#FAF6F0] flex flex-col items-center justify-center p-4 sm:p-8 text-center z-10 overflow-hidden">
+          <div className="w-full flex flex-col items-center justify-center space-y-3">
+            <span className="font-mono text-xs sm:text-sm font-black uppercase tracking-widest text-obsidian bg-sage px-4 py-1.5 rounded border-2 border-obsidian shadow-sharp-sm">
               FAIQA RASHID // FULL-STACK &amp; AI
             </span>
 
-            {/* Massive Oversized Display Typography - No Boxes or Buttons */}
-            <h1
-              className="text-[13vw] sm:text-[13.5vw] md:text-[14vw] font-black text-obsidian tracking-tighter uppercase leading-none select-none"
-              style={{ fontSize: "clamp(3.5rem, 13.5vw, 11.5rem)" }}
+            {/* Massive Bold Real PORTFOLIO Text - Positioned to peek through torn slit */}
+            <motion.h1
+              animate={
+                isExpanding
+                  ? { scale: 1.08, opacity: 0 }
+                  : { scale: [1, 1.03, 1] }
+              }
+              transition={
+                isExpanding
+                  ? { duration: 0.8, ease: "easeOut" }
+                  : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
+              }
+              className="font-black text-obsidian tracking-tighter uppercase leading-none select-none"
+              style={{ fontSize: "clamp(4rem, 14vw, 12rem)" }}
             >
               PORTFOLIO
-            </h1>
+            </motion.h1>
           </div>
         </div>
 
-        {/* Top Dark Torn Paper Flap with Sage Accent Line */}
+        {/* Top Dark Torn Paper Flap with Organic Fibrous Sage Edge */}
         <motion.div
           animate={isExpanding ? { y: "-110%" } : { y: "0%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-          className="absolute inset-0 bg-[#121413] z-20"
-          style={{
-            clipPath:
-              "polygon(0% 0%, 100% 0%, 100% 48%, 93% 53%, 84% 47%, 77% 53%, 69% 48%, 61% 54%, 53% 47%, 45% 53%, 37% 48%, 29% 54%, 21% 47%, 13% 53%, 6% 48%, 0% 53%)",
-          }}
+          className="absolute inset-x-0 top-0 h-[52vh] z-20 overflow-visible pointer-events-none"
         >
-          {/* Sage Green Jagged Torn Edge Highlight */}
-          <div className="absolute inset-0 border-b-4 border-sage opacity-90 pointer-events-none" />
+          <svg
+            className="w-full h-full drop-shadow-md"
+            viewBox="0 0 1200 800"
+            preserveAspectRatio="none"
+          >
+            {/* Sage Green Jagged Underlay Edge (Replaces reference red edge) */}
+            <path
+              d={topAccentLine}
+              fill="none"
+              stroke="#97A97C"
+              strokeWidth="16"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* Solid Obsidian Black Top Paper Flap */}
+            <path d={topJaggedEdge} fill="#121413" />
+          </svg>
         </motion.div>
 
-        {/* Bottom Dark Torn Paper Flap with Sage Accent Line */}
+        {/* Bottom Dark Torn Paper Flap with Organic Fibrous Sage Edge */}
         <motion.div
           animate={isExpanding ? { y: "110%" } : { y: "0%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-          className="absolute inset-0 bg-[#121413] z-20"
-          style={{
-            clipPath:
-              "polygon(0% 47%, 6% 53%, 13% 47%, 21% 53%, 29% 47%, 37% 53%, 45% 47%, 53% 53%, 61% 47%, 69% 53%, 77% 47%, 84% 53%, 93% 47%, 100% 52%, 100% 100%, 0% 100%)",
-          }}
+          className="absolute inset-x-0 bottom-0 h-[52vh] z-20 overflow-visible pointer-events-none"
         >
-          {/* Sage Green Jagged Torn Edge Highlight */}
-          <div className="absolute inset-0 border-t-4 border-sage opacity-90 pointer-events-none" />
+          <svg
+            className="w-full h-full drop-shadow-md"
+            viewBox="0 0 1200 800"
+            preserveAspectRatio="none"
+          >
+            {/* Sage Green Jagged Underlay Edge (Replaces reference red edge) */}
+            <path
+              d={bottomAccentLine}
+              fill="none"
+              stroke="#97A97C"
+              strokeWidth="16"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* Solid Obsidian Black Bottom Paper Flap */}
+            <path d={bottomJaggedEdge} fill="#121413" />
+          </svg>
         </motion.div>
       </motion.div>
     </AnimatePresence>
