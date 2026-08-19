@@ -6,18 +6,21 @@ import { m, useReducedMotion, AnimatePresence } from "framer-motion";
 export default function WebtoonIntro() {
   const shouldReduceMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isExpanding, setIsExpanding] = useState<boolean>(false);
 
   useEffect(() => {
-    const seen =
-      sessionStorage.getItem("portfolio_intro_seen") ||
-      sessionStorage.getItem("webtoon_intro_seen");
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    try {
+      const seen =
+        sessionStorage.getItem("portfolio_intro_seen") ||
+        sessionStorage.getItem("webtoon_intro_seen");
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
 
-    if (!seen && !prefersReducedMotion) {
+      if (seen || prefersReducedMotion) {
+        return;
+      }
+
       setIsVisible(true);
 
       // Hold static torn frame for 2.5 seconds, then expand
@@ -36,14 +39,16 @@ export default function WebtoonIntro() {
         clearTimeout(tearTimer);
         clearTimeout(unmountTimer);
       };
-    } else {
-      setIsLoaded(true);
+    } catch {
+      // Fallback for restricted storage environments
     }
   }, []);
 
   const handleSkipIntro = () => {
-    sessionStorage.setItem("portfolio_intro_seen", "true");
-    sessionStorage.setItem("webtoon_intro_seen", "true");
+    try {
+      sessionStorage.setItem("portfolio_intro_seen", "true");
+      sessionStorage.setItem("webtoon_intro_seen", "true");
+    } catch {}
     setIsVisible(false);
   };
 
@@ -54,17 +59,7 @@ export default function WebtoonIntro() {
     }
   };
 
-  if (!isLoaded && !isVisible) {
-    return null;
-  }
-
-  if (!isVisible) {
-    return null;
-  }
-
-  if (shouldReduceMotion) {
-    sessionStorage.setItem("portfolio_intro_seen", "true");
-    sessionStorage.setItem("webtoon_intro_seen", "true");
+  if (!isVisible || shouldReduceMotion) {
     return null;
   }
 
@@ -114,7 +109,7 @@ export default function WebtoonIntro() {
               FAIQA RASHID // FULL-STACK &amp; AI
             </span>
 
-            {/* Massive Bold Real PORTFOLIO Text - Positioned to peek through torn slit */}
+            {/* Massive Bold Real PORTFOLIO Text */}
             <m.h1
               animate={
                 isExpanding
@@ -134,7 +129,7 @@ export default function WebtoonIntro() {
           </div>
         </div>
 
-        {/* Top Dark Torn Paper Flap with Organic Fibrous Sage Edge */}
+        {/* Top Dark Torn Paper Flap */}
         <m.div
           animate={isExpanding ? { y: "-110%" } : { y: "0%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
@@ -145,7 +140,6 @@ export default function WebtoonIntro() {
             viewBox="0 0 1200 800"
             preserveAspectRatio="none"
           >
-            {/* Sage Green Jagged Underlay Edge (Replaces reference red edge) */}
             <path
               d={topAccentLine}
               fill="none"
@@ -154,12 +148,11 @@ export default function WebtoonIntro() {
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            {/* Solid Obsidian Black Top Paper Flap */}
             <path d={topJaggedEdge} fill="#121413" />
           </svg>
         </m.div>
 
-        {/* Bottom Dark Torn Paper Flap with Organic Fibrous Sage Edge */}
+        {/* Bottom Dark Torn Paper Flap */}
         <m.div
           animate={isExpanding ? { y: "110%" } : { y: "0%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
@@ -170,7 +163,6 @@ export default function WebtoonIntro() {
             viewBox="0 0 1200 800"
             preserveAspectRatio="none"
           >
-            {/* Sage Green Jagged Underlay Edge (Replaces reference red edge) */}
             <path
               d={bottomAccentLine}
               fill="none"
@@ -179,7 +171,6 @@ export default function WebtoonIntro() {
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            {/* Solid Obsidian Black Bottom Paper Flap */}
             <path d={bottomJaggedEdge} fill="#121413" />
           </svg>
         </m.div>
