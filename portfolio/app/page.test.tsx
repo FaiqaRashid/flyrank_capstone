@@ -9,14 +9,14 @@ jest.mock("./components/Contact", () => () => <div data-testid="mock-contact">Co
 jest.mock("./components/SectionDivider", () => () => <div data-testid="mock-divider">Divider</div>);
 
 describe("Home main page", () => {
-  test("renders all main portfolio sections and dividers", () => {
+  test("renders all main portfolio sections and dividers", async () => {
     render(<Home />);
 
-    expect(screen.getByTestId("mock-hero")).toBeInTheDocument();
-    expect(screen.getByTestId("mock-about")).toBeInTheDocument();
-    expect(screen.getByTestId("mock-skills")).toBeInTheDocument();
-    expect(screen.getByTestId("mock-projects")).toBeInTheDocument();
-    expect(screen.getByTestId("mock-contact")).toBeInTheDocument();
-    expect(screen.getAllByTestId("mock-divider").length).toBe(4);
+    expect(await screen.findByTestId("mock-hero")).toBeInTheDocument();
+    expect(await screen.findByTestId("mock-about")).toBeInTheDocument();
+    expect(await screen.findByTestId("mock-skills")).toBeInTheDocument();
+    expect(await screen.findByTestId("mock-projects")).toBeInTheDocument();
+    expect(await screen.findByTestId("mock-contact")).toBeInTheDocument();
+    expect((await screen.findAllByTestId("mock-divider")).length).toBe(4);
   });
 });
