@@ -2,17 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Footer from "@/app/components/Footer";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    a: ({ children, onClick, href, ...props }: any) => (
-      <a href={href} onClick={onClick} {...props}>
-        {children}
-      </a>
-    ),
-  },
-  useReducedMotion: () => false,
-}));
-
 describe("Footer component", () => {
   test("renders copyright text and social links", () => {
     render(<Footer />);

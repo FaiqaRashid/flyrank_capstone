@@ -1,14 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Skills from "@/app/components/Skills";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    span: ({ children, ...props }: any) => <span {...props}>{children}</span>,
-  },
-  useReducedMotion: () => false,
-}));
-
 describe("Skills component", () => {
   test("renders section heading and skill categories", () => {
     render(<Skills />);

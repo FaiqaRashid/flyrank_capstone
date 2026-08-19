@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { m, useReducedMotion, AnimatePresence } from "framer-motion";
 
 export default function WebtoonIntro() {
   const shouldReduceMotion = useReducedMotion();
@@ -83,7 +83,7 @@ export default function WebtoonIntro() {
 
   return (
     <AnimatePresence>
-      <motion.div
+      <m.div
         initial={{ opacity: 1 }}
         animate={{ opacity: isExpanding ? 0.95 : 1 }}
         exit={{ opacity: 0 }}
@@ -95,7 +95,7 @@ export default function WebtoonIntro() {
       >
         {/* Floating Skip Button */}
         <div className="absolute top-6 right-6 z-50">
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleSkipIntro}
@@ -104,7 +104,7 @@ export default function WebtoonIntro() {
             aria-label="Skip torn paper intro and enter portfolio"
           >
             Skip Intro ✕
-          </motion.button>
+          </m.button>
         </div>
 
         {/* Revealed Paper Background Canvas with Real PORTFOLIO Heading */}
@@ -115,7 +115,7 @@ export default function WebtoonIntro() {
             </span>
 
             {/* Massive Bold Real PORTFOLIO Text - Positioned to peek through torn slit */}
-            <motion.h1
+            <m.h1
               animate={
                 isExpanding
                   ? { scale: 1.08, opacity: 0 }
@@ -130,12 +130,12 @@ export default function WebtoonIntro() {
               style={{ fontSize: "clamp(4rem, 14vw, 12rem)" }}
             >
               PORTFOLIO
-            </motion.h1>
+            </m.h1>
           </div>
         </div>
 
         {/* Top Dark Torn Paper Flap with Organic Fibrous Sage Edge */}
-        <motion.div
+        <m.div
           animate={isExpanding ? { y: "-110%" } : { y: "0%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
           className="absolute inset-x-0 top-0 h-[52vh] z-20 overflow-visible pointer-events-none"
@@ -157,10 +157,10 @@ export default function WebtoonIntro() {
             {/* Solid Obsidian Black Top Paper Flap */}
             <path d={topJaggedEdge} fill="#121413" />
           </svg>
-        </motion.div>
+        </m.div>
 
         {/* Bottom Dark Torn Paper Flap with Organic Fibrous Sage Edge */}
-        <motion.div
+        <m.div
           animate={isExpanding ? { y: "110%" } : { y: "0%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
           className="absolute inset-x-0 bottom-0 h-[52vh] z-20 overflow-visible pointer-events-none"
@@ -182,8 +182,8 @@ export default function WebtoonIntro() {
             {/* Solid Obsidian Black Bottom Paper Flap */}
             <path d={bottomJaggedEdge} fill="#121413" />
           </svg>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </AnimatePresence>
   );
 }

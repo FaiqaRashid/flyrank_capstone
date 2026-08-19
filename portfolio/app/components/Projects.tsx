@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import { m, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 
 interface ProjectItem {
   id: string;
@@ -103,7 +103,7 @@ function TiltProjectCard({
   };
 
   return (
-    <motion.article
+    <m.article
       initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
@@ -140,7 +140,7 @@ function TiltProjectCard({
         {/* Tech Tags */}
         <div className="flex flex-wrap gap-2 pt-2">
           {project.tech.map((t, tagIndex) => (
-            <motion.span
+            <m.span
               key={t}
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -150,7 +150,7 @@ function TiltProjectCard({
               className="bg-sage text-obsidian text-xs font-extrabold px-3 py-1 rounded-full border-2 border-obsidian font-mono shadow-sharp-sm cursor-pointer transition-transform"
             >
               {t}
-            </motion.span>
+            </m.span>
           ))}
         </div>
       </div>
@@ -158,7 +158,7 @@ function TiltProjectCard({
       {/* Action Links */}
       <div className="flex flex-wrap items-center gap-3 pt-4 border-t-2 border-obsidian/20 mt-auto">
         {project.demoUrl && (
-          <motion.a
+          <m.a
             whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
             whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
             transition={{ duration: 0.15 }}
@@ -182,11 +182,11 @@ function TiltProjectCard({
                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
               />
             </svg>
-          </motion.a>
+          </m.a>
         )}
 
         {project.githubUrl && (
-          <motion.a
+          <m.a
             whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
             whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
             transition={{ duration: 0.15 }}
@@ -207,10 +207,10 @@ function TiltProjectCard({
               />
             </svg>
             <span>GitHub Code</span>
-          </motion.a>
+          </m.a>
         )}
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 
@@ -224,7 +224,7 @@ export default function Projects() {
     >
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Section Header */}
-        <motion.div
+        <m.div
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -240,7 +240,7 @@ export default function Projects() {
           <span className="text-xs font-mono font-bold text-obsidian/70">
             SHOWCASING 4 KEY BUILDS
           </span>
-        </motion.div>
+        </m.div>
 
         {/* Balanced Equal-Height 3D Tilt Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">

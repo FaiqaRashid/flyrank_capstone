@@ -2,24 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Hero from "@/app/components/Hero";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    a: ({ children, onClick, href, ...props }: any) => (
-      <a href={href} onClick={onClick} {...props}>
-        {children}
-      </a>
-    ),
-    button: ({ children, onClick, ...props }: any) => (
-      <button onClick={onClick} {...props}>
-        {children}
-      </button>
-    ),
-    span: ({ children, ...props }: any) => <span {...props}>{children}</span>,
-  },
-  useReducedMotion: () => false,
-}));
-
 // Mock Next Image
 jest.mock("next/image", () => ({
   __esModule: true,

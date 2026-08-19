@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
 export default function Contact() {
   const shouldReduceMotion = useReducedMotion();
@@ -53,7 +53,7 @@ export default function Contact() {
       id="contact"
       className="section-padding scroll-mt-20 border-b-2 border-obsidian bg-cream overflow-hidden"
     >
-      <motion.div
+      <m.div
         initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
@@ -83,7 +83,7 @@ export default function Contact() {
                 Direct Profiles:
               </div>
               <div className="flex items-center gap-3">
-                <motion.a
+                <m.a
                   whileHover={shouldReduceMotion ? {} : { scale: 1.04 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.96 }}
                   transition={{ duration: 0.15 }}
@@ -103,9 +103,9 @@ export default function Contact() {
                     />
                   </svg>
                   <span>GitHub</span>
-                </motion.a>
+                </m.a>
 
-                <motion.a
+                <m.a
                   whileHover={shouldReduceMotion ? {} : { scale: 1.04 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.96 }}
                   transition={{ duration: 0.15 }}
@@ -121,7 +121,7 @@ export default function Contact() {
                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z" />
                   </svg>
                   <span>LinkedIn</span>
-                </motion.a>
+                </m.a>
               </div>
             </div>
           </div>
@@ -142,7 +142,7 @@ export default function Contact() {
                 <p className="text-sm font-medium text-[#14532D]">
                   Thank you for reaching out. I will review your message and reply as soon as possible.
                 </p>
-                <motion.button
+                <m.button
                   whileHover={shouldReduceMotion ? {} : { scale: 1.04 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.96 }}
                   type="button"
@@ -150,7 +150,7 @@ export default function Contact() {
                   className="bg-sage hover:bg-sage/90 text-obsidian font-mono text-xs font-black uppercase px-4 py-2 rounded-lg border-2 border-obsidian shadow-sharp-sm cursor-pointer"
                 >
                   Send Another Message
-                </motion.button>
+                </m.button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -252,7 +252,7 @@ export default function Contact() {
                 </div>
 
                 {/* Submit Button */}
-                <motion.button
+                <m.button
                   whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                   transition={{ duration: 0.15 }}
@@ -269,12 +269,12 @@ export default function Contact() {
                   ) : (
                     "Send Message 🚀"
                   )}
-                </motion.button>
+                </m.button>
               </form>
             )}
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

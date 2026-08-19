@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
 const skillCategories = [
   {
@@ -42,7 +42,7 @@ export default function Skills() {
     >
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Section Header */}
-        <motion.div
+        <m.div
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -53,12 +53,12 @@ export default function Skills() {
           <h2 className="text-2xl sm:text-3xl font-black text-obsidian uppercase tracking-tight">
             02 // Technical Skills
           </h2>
-        </motion.div>
+        </m.div>
 
         {/* Balanced Equal-Height Grid with Staggered Tags */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {skillCategories.map((category, cardIndex) => (
-            <motion.div
+            <m.div
               key={category.title}
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export default function Skills() {
 
               <div className="flex flex-wrap gap-2 pt-1">
                 {category.skills.map((skill, tagIndex) => (
-                  <motion.span
+                  <m.span
                     key={skill}
                     initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -91,10 +91,10 @@ export default function Skills() {
                     className="bg-cream text-obsidian text-xs font-extrabold px-3 py-1.5 rounded-lg border-2 border-obsidian font-mono shadow-sharp-sm hover:bg-sage transition-colors cursor-pointer"
                   >
                     {skill}
-                  </motion.span>
+                  </m.span>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

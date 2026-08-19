@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
 const philosophyItems = [
   { title: "BUILD", subtitle: "Full-Stack Apps" },
@@ -17,7 +17,7 @@ export default function About() {
       id="about"
       className="section-padding scroll-mt-20 border-b-2 border-obsidian bg-cream overflow-hidden"
     >
-      <motion.div
+      <m.div
         initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
@@ -44,7 +44,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t-2 border-obsidian/20 text-center font-mono text-sm font-bold">
             {philosophyItems.map((item, idx) => (
-              <motion.div
+              <m.div
                 key={item.title}
                 initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -55,11 +55,11 @@ export default function About() {
               >
                 <span className="block text-sage font-black text-lg">{item.title}</span>
                 <span className="text-obsidian/90 font-extrabold">{item.subtitle}</span>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

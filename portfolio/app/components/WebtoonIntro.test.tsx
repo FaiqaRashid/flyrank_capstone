@@ -2,20 +2,6 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import WebtoonIntro from "@/app/components/WebtoonIntro";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    h1: ({ children, ...props }: any) => <h1 {...props}>{children}</h1>,
-    button: ({ children, onClick, onKeyDown, ...props }: any) => (
-      <button onClick={onClick} onKeyDown={onKeyDown} {...props}>
-        {children}
-      </button>
-    ),
-  },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
-  useReducedMotion: () => false,
-}));
-
 describe("WebtoonIntro component", () => {
   beforeEach(() => {
     sessionStorage.clear();

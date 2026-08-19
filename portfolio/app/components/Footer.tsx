@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
 export default function Footer() {
   const shouldReduceMotion = useReducedMotion();
@@ -25,7 +25,7 @@ export default function Footer() {
 
         {/* Social Icons & Back to top link */}
         <div className="flex items-center gap-4">
-          <motion.a
+          <m.a
             whileHover={shouldReduceMotion ? {} : { scale: 1.08, y: -1 }}
             whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
             transition={{ duration: 0.15 }}
@@ -36,9 +36,9 @@ export default function Footer() {
             aria-label="Faiqa Rashid GitHub Profile"
           >
             GitHub
-          </motion.a>
+          </m.a>
           <span>·</span>
-          <motion.a
+          <m.a
             whileHover={shouldReduceMotion ? {} : { scale: 1.08, y: -1 }}
             whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
             transition={{ duration: 0.15 }}
@@ -49,9 +49,9 @@ export default function Footer() {
             aria-label="Faiqa Rashid LinkedIn Profile"
           >
             LinkedIn
-          </motion.a>
+          </m.a>
           <span>·</span>
-          <motion.a
+          <m.a
             whileHover={shouldReduceMotion ? {} : { scale: 1.08, y: -1 }}
             whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
             transition={{ duration: 0.15 }}
@@ -60,7 +60,7 @@ export default function Footer() {
             className="hover:text-sage underline transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-obsidian"
           >
             Back to top ↑
-          </motion.a>
+          </m.a>
         </div>
       </div>
     </footer>

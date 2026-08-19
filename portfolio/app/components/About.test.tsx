@@ -1,13 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import About from "@/app/components/About";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  useReducedMotion: () => false,
-}));
-
 describe("About component", () => {
   test("renders section heading and philosophy cards", () => {
     render(<About />);

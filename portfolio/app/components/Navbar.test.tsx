@@ -2,18 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Navbar from "@/app/components/Navbar";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    a: ({ children, onClick, href, ...props }: any) => (
-      <a href={href} onClick={onClick} {...props}>
-        {children}
-      </a>
-    ),
-    span: ({ children, ...props }: any) => <span {...props}>{children}</span>,
-  },
-  useReducedMotion: () => false,
-}));
-
 describe("Navbar component", () => {
   beforeEach(() => {
     // Mock scrollIntoView

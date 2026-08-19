@@ -1,27 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Projects from "@/app/components/Projects";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    article: ({ children, onMouseMove, onMouseLeave, ...props }: any) => (
-      <article onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} {...props}>
-        {children}
-      </article>
-    ),
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    span: ({ children, ...props }: any) => <span {...props}>{children}</span>,
-    a: ({ children, href, ...props }: any) => (
-      <a href={href} {...props}>
-        {children}
-      </a>
-    ),
-  },
-  useMotionValue: () => ({ set: jest.fn() }),
-  useSpring: () => ({}),
-  useTransform: () => "0deg",
-  useReducedMotion: () => false,
-}));
-
 describe("Projects component", () => {
   test("renders section heading and all 4 featured project titles", () => {
     render(<Projects />);

@@ -2,18 +2,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import BackToTop from "@/app/components/BackToTop";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    button: ({ children, onClick, ...props }: any) => (
-      <button onClick={onClick} {...props}>
-        {children}
-      </button>
-    ),
-  },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
-  useReducedMotion: () => false,
-}));
-
 describe("BackToTop component", () => {
   test("is hidden initially when scrollY is 0", () => {
     render(<BackToTop />);

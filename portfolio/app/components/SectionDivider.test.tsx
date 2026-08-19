@@ -1,13 +1,6 @@
 import { render } from "@testing-library/react";
 import SectionDivider from "@/app/components/SectionDivider";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  useReducedMotion: () => false,
-}));
-
 describe("SectionDivider component", () => {
   test("renders hidden divider element for screen readers", () => {
     const { container } = render(<SectionDivider />);

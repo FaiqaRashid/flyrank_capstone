@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -57,7 +57,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b-2 border-obsidian transition-all">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo */}
-        <motion.a
+        <m.a
           whileHover={shouldReduceMotion ? {} : { scale: 1.04 }}
           whileTap={shouldReduceMotion ? {} : { scale: 0.96 }}
           transition={{ duration: 0.18, ease: "easeOut" }}
@@ -72,7 +72,7 @@ export default function Navbar() {
           <span className="font-bold text-lg hidden sm:inline-block">
             Faiqa Rashid
           </span>
-        </motion.a>
+        </m.a>
 
         {/* Desktop Anchor Links with Morphing Active Indicator */}
         <nav className="hidden md:flex items-center gap-1.5 relative" aria-label="Main Navigation">
@@ -93,7 +93,7 @@ export default function Navbar() {
                 aria-current={isActive ? "page" : undefined}
               >
                 {isActive && (
-                  <motion.span
+                  <m.span
                     layoutId={shouldReduceMotion ? undefined : "activeNavHighlight"}
                     transition={{
                       type: "spring",

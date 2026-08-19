@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 
 export default function BackToTop() {
   const shouldReduceMotion = useReducedMotion();
@@ -31,7 +31,7 @@ export default function BackToTop() {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.button
+        <m.button
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
@@ -56,7 +56,7 @@ export default function BackToTop() {
               d="M5 10l7-7m0 0l7 7m-7-7v18"
             />
           </svg>
-        </motion.button>
+        </m.button>
       )}
     </AnimatePresence>
   );

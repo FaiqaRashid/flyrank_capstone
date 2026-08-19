@@ -56,3 +56,44 @@ Object.defineProperty(global, "IntersectionObserver", {
   configurable: true,
   value: MockIntersectionObserver,
 });
+
+// Mock framer-motion globally for Jest unit tests with component caching & full prop forwarding
+jest.mock("framer-motion", () => {
+  const React = require("react");
+
+  const componentCache = new Map();
+
+  const getComponent = (Tag) => {
+    if (!componentCache.has(Tag)) {
+      const Component = React.forwardRef(({ children, ...props }, ref) =>
+        React.createElement(Tag, { ...props, ref }, children)
+      );
+      Component.displayName = `Motion(${Tag})`;
+      componentCache.set(Tag, Component);
+    }
+    return componentCache.get(Tag);
+  };
+
+  const handler = {
+    get: (_target, prop) => {
+      if (typeof prop !== "string") return undefined;
+      const validTags = ["div", "button", "a", "h1", "span", "article", "nav", "section", "p", "form", "input", "textarea"];
+      const Tag = validTags.includes(prop) ? prop : "div";
+      return getComponent(Tag);
+    },
+  };
+
+  const mElements = new Proxy({}, handler);
+
+  return {
+    LazyMotion: ({ children }) => React.createElement(React.Fragment, null, children),
+    domAnimation: {},
+    m: mElements,
+    motion: mElements,
+    AnimatePresence: ({ children }) => React.createElement(React.Fragment, null, children),
+    useReducedMotion: () => false,
+    useMotionValue: (val) => ({ get: () => val, set: () => {} }),
+    useSpring: (val) => val,
+    useTransform: (val) => val,
+  };
+});

@@ -2,23 +2,6 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Contact from "@/app/components/Contact";
 
-jest.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    a: ({ children, href, ...props }: any) => (
-      <a href={href} {...props}>
-        {children}
-      </a>
-    ),
-    button: ({ children, onClick, type, disabled, ...props }: any) => (
-      <button type={type} disabled={disabled} onClick={onClick} {...props}>
-        {children}
-      </button>
-    ),
-  },
-  useReducedMotion: () => false,
-}));
-
 describe("Contact component", () => {
   beforeEach(() => {
     jest.useFakeTimers();

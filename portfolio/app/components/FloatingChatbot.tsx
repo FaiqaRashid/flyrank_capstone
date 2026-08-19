@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import ChatWindow from "./ChatWindow";
 
 export default function FloatingChatbot() {
@@ -41,7 +41,7 @@ export default function FloatingChatbot() {
   return (
     <>
       {/* Floating Launcher Button with Motion Entrance & Friendly Robot Icon */}
-      <motion.button
+      <m.button
         ref={toggleBtnRef}
         onClick={handleToggle}
         initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.6 }}
@@ -90,12 +90,12 @@ export default function FloatingChatbot() {
             <span className="absolute -top-1 -right-1 w-3 h-3 bg-cream border border-obsidian rounded-full"></span>
           </div>
         )}
-      </motion.button>
+      </m.button>
 
       {/* Satisfying Spring Scale & Fade Chat Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             ref={widgetContainerRef}
             initial={
               shouldReduceMotion
@@ -126,7 +126,7 @@ export default function FloatingChatbot() {
               isExpanded={isExpanded}
               onToggleExpand={() => setIsExpanded(!isExpanded)}
             />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>
